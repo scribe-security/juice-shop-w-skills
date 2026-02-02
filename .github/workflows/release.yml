@@ -19,7 +19,7 @@ jobs:
         node-version: [20, 22, 24]
       fail-fast: false
     permissions:
-        contents: read
+        contents: write
         id-token: write
     steps:
       - name: "Check out Git repository"
