@@ -54,7 +54,6 @@ jobs:
             scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
             components: commits,packages,files,dep
             format: attest
-            config: .valint.yaml
             verbose: 2
             label: AGENT_SKILL
             scribe-url: ${{ env.LOCAL_URL }}
