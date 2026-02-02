@@ -51,7 +51,7 @@ jobs:
             target: "dir:.github/skills/${{env.SKILL_NAME}}"
             product-key: ${{ env.SKILL_NAME }}
             product-version: ${{env.PRODUCT_VERSION}} #${{env.GITHUB_RUN_NUM}}
-            scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
+            scribe-client-secret: ${{ secrets.ATTSTORE_TOKEN }}
             components: commits,packages,files,dep
             format: attest
             verbose: 2
