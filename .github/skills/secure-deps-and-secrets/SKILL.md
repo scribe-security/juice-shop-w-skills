@@ -8,7 +8,7 @@ tools:
   - run_tests
 ---
 
-### When to use
+## When to use
 Use this skill when the user says:
 - "Dependabot flagged vulnerabilities"
 - "Code scanning found issues"
