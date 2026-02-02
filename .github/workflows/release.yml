@@ -5,6 +5,10 @@ on:
       - v*
 env:
   CYCLONEDX_NPM_VERSION: '^2.0.0||^3.0.0'
+  PRODUCT_VERSION: 1.1.5
+  SKILL_NAME: secure-deps-and-secrets
+  PRODUCT_NAME: Juice-Shop-Local
+  LOCAL_URL: "https://attstore.scribesecurity.com"
 jobs:
   package:
     runs-on: ${{ matrix.os }}
@@ -16,6 +20,19 @@ jobs:
     steps:
       - name: "Check out Git repository"
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+
+      - name: "Verify policy"
+        uses: scribe-security/action-verify@master
+        with:
+            target: "dir:.github/skills/${{env.SKILL_NAME}}"
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{env.PRODUCT_VERSION}} 
+            scribe-client-secret: ${{ secrets.ATTSTORE_TOKEN }}
+            components: commits,packages,files,dep
+            format: attest
+            verbose: 2
+            label: AGENT_SKILL
+            scribe-url: ${{ env.LOCAL_URL }}
       - name: "Use Node.js ${{ matrix.node-version }}"
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
         with:
