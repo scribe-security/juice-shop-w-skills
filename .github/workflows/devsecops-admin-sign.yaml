@@ -6,6 +6,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
   APP_NAME: Storage-Manager
   SKILL_NAME: secure-deps-and-secrets
+  PRODUCT_NAME: Juice-Shop-Hardening
   #Atlantic-Rain
   VALINT_BOM_AUTHOR_NAME: Guy-Chernobrov
   VALINT_BOM_AUTHOR_EMAIL: gc@scribesecurity.com
@@ -49,7 +50,7 @@ jobs:
         uses: scribe-security/action-bom@master
         with:
             target: "dir:.github/skills/${{env.SKILL_NAME}}"
-            product-key: ${{ env.SKILL_NAME }}
+            product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{env.PRODUCT_VERSION}} #${{env.GITHUB_RUN_NUM}}
             scribe-client-secret: ${{ secrets.ATTSTORE_TOKEN }}
             components: commits,packages,files,dep
