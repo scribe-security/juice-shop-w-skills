@@ -1,0 +1,62 @@
+name: devsecops-admin-signed
+
+env:
+    
+  PRODUCT_VERSION: 1.1.5
+  IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
+  APP_NAME: Storage-Manager
+  SKILL_NAME: secure-deps-and-secrets
+  #Atlantic-Rain
+  VALINT_BOM_AUTHOR_NAME: Guy-Chernobrov
+  VALINT_BOM_AUTHOR_EMAIL: gc@scribesecurity.com
+  VALINT_BOM_AUTHOR_PHONE: 052-9281309
+  VALINT_BOM_SUPPLIER_NAME: Scribe-Security
+  VALINT_BOM_SUPPLIER_URL: www.scribesecurity.com
+  VALINT_BOM_SUPPLIER_EMAIL: info@scribesecurity.com
+  VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
+  INTEGRATION_TEST: 15s
+  GITHUB_RUN_NUM: ${{ github.run_number }}
+  VALINT_T: ${{secrets.SCRIBE_DEV_M2M_CLIENT_SECRET}}
+  # LOCAL_URL: "https://api.scribesecurity.com"
+  LOCAL_URL: "https://attstore.scribesecurity.com"
+  
+on:
+  workflow_dispatch:
+
+
+concurrency: 
+  group: build-in-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  
+  skill-attest:
+    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+
+     
+           
+      - name: Generate signed SBOM for skill
+        uses: scribe-security/action-bom@master
+        with:
+            target: "dir:.github/skills/"${{env.SKILL_NAME}}
+            product-key: ${{ env.SKILL_NAME }}
+            product-version: ${{env.PRODUCT_VERSION}} #${{env.GITHUB_RUN_NUM}}
+            scribe-client-secret: ${{ secrets.SCRIBE_DEV_M2M_CLIENT_SECRET }}
+            components: commits,packages,files,dep
+            format: attest
+            config: .valint.yaml
+            verbose: 2
+            label: AGENT_SKILL
+            scribe-url: ${{ env.LOCAL_URL }}
+
+     
