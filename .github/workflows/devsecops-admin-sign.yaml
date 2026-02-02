@@ -6,7 +6,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
   APP_NAME: Storage-Manager
   SKILL_NAME: secure-deps-and-secrets
-  PRODUCT_NAME: Juice-Shop-Hardening
+  PRODUCT_NAME: Juice-Shop-Local
   #Atlantic-Rain
   VALINT_BOM_AUTHOR_NAME: Guy-Chernobrov
   VALINT_BOM_AUTHOR_EMAIL: gc@scribesecurity.com
