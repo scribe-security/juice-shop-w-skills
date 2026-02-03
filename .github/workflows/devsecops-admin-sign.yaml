@@ -2,7 +2,7 @@ name: devsecops-admin-signed
 
 env:
     
-  PRODUCT_VERSION: 1.1.5
+  PRODUCT_VERSION: 1.1.9
   IMAGE_NAME: ${{ github.repository }}:${{ github.sha }}
   APP_NAME: Storage-Manager
   SKILL_NAME: secure-deps-and-secrets
