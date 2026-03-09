@@ -1,0 +1,17 @@
+name: Scan Skills
+on:
+  pull_request:
+    paths: [".github/skills/**"]
+jobs:
+  scan:
+    uses: cisco-ai-defense/skill-scanner/.github/workflows/scan-skills.yml@main
+    with:
+      skill_path: .cursor/skills
+      format: markdown
+      use_llm: true
+      llm_model: gpt-4o
+    secrets:
+      llm_api_key: ${{ secrets.OPENAI_API_KEY }}
+    permissions:
+      security-events: write
+      contents: read
