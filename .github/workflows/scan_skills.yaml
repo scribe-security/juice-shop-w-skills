@@ -2,6 +2,7 @@ name: Scan Skills
 on:
   pull_request:
     paths: [".github/skills/**"]
+  workflow_dispatch: 
 jobs:
   scan:
     uses: cisco-ai-defense/skill-scanner/.github/workflows/scan-skills.yml@main
